@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Bed, Bath, Square, Star, CheckCircle2, ChevronDown, Send, ShieldCheck, QrCode } from 'lucide-react';
+import { Bed, Bath, Square, Star, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, Send, ShieldCheck, QrCode, X } from 'lucide-react';
 import { useCurrency } from '@/context/CurrencyContext';
 import { properties } from '@/data/properties';
 import { BrochureButton } from '@/components/BrochureButton';
@@ -16,6 +16,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
   // Find property or default to the first one if not found
   const propertyId = parseInt(unwrappedParams.id);
   const property = properties.find(p => p.id === propertyId) || properties[0];
+  const photos = [property.image, ...property.gallery];
 
   // Interactive Mortgage Calculator State
   const [propertyPrice, setPropertyPrice] = useState(property.price);
@@ -25,6 +26,8 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
 
   // Accordion FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(0);
 
   // Calculated Mortgage
   const loanAmount = propertyPrice * (1 - downPayment / 100);
@@ -37,6 +40,30 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
 
   const similarProperties = properties.filter(p => p.id !== property.id).slice(0, 2);
 
+  React.useEffect(() => {
+    if (!isGalleryOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsGalleryOpen(false);
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [isGalleryOpen]);
+
+  const openGallery = (photoIndex: number) => {
+    setSelectedPhoto(photoIndex);
+    setIsGalleryOpen(true);
+  };
+
+  const showPreviousPhoto = () => {
+    setSelectedPhoto((currentPhoto) => (currentPhoto - 1 + photos.length) % photos.length);
+  };
+
+  const showNextPhoto = () => {
+    setSelectedPhoto((currentPhoto) => (currentPhoto + 1) % photos.length);
+  };
+
   return (
     <div className="w-full bg-[#F6F6F4] min-h-screen font-sans text-neutral-900 pt-28">
       
@@ -44,26 +71,111 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
       <div className="max-w-7xl mx-auto px-6 mb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:h-[480px]">
           {/* Main Large Image */}
-          <div className="lg:col-span-8 relative rounded-3xl overflow-hidden shadow-sm bg-neutral-200 h-[300px] sm:h-[400px] lg:h-full">
-            <Image alt={property.title} className="object-cover" fill src={property.image}/>
-          </div>
+          <button
+            type="button"
+            onClick={() => openGallery(0)}
+            className="lg:col-span-8 relative rounded-3xl overflow-hidden shadow-sm bg-neutral-200 h-[300px] sm:h-[400px] lg:h-full text-left group focus:outline-none focus-visible:ring-4 focus-visible:ring-[#FFDE02]"
+            aria-label={`Open photo gallery for ${property.title}`}
+          >
+            <Image alt={property.title} className="object-cover transition-transform duration-500 group-hover:scale-105" fill sizes="(min-width: 1024px) 66vw, 100vw" src={property.image}/>
+          </button>
           {/* Thumbnail Grid */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-4">
-            <div className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px]">
-              <Image alt="Gallery 1" className="object-cover" fill src={property.gallery[0]}/>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px]">
-              <Image alt="Gallery 2" className="object-cover" fill src={property.gallery[1]}/>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px] col-span-2">
-              <Image alt="Gallery 3" className="object-cover" fill src={property.gallery[2]}/>
-              <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center text-white font-bold text-sm cursor-pointer hover:bg-black/50 transition-colors">
-                +12 Photos Available
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={() => openGallery(1)}
+              className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px] group focus:outline-none focus-visible:ring-4 focus-visible:ring-[#FFDE02]"
+              aria-label="Open photo 2"
+            >
+              <Image alt={`${property.title} gallery image 1`} className="object-cover transition-transform duration-500 group-hover:scale-105" fill sizes="(min-width: 1024px) 17vw, 50vw" src={photos[1]}/>
+            </button>
+            <button
+              type="button"
+              onClick={() => openGallery(2)}
+              className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px] group focus:outline-none focus-visible:ring-4 focus-visible:ring-[#FFDE02]"
+              aria-label="Open photo 3"
+            >
+              <Image alt={`${property.title} gallery image 2`} className="object-cover transition-transform duration-500 group-hover:scale-105" fill sizes="(min-width: 1024px) 17vw, 50vw" src={photos[2]}/>
+            </button>
+            <button
+              type="button"
+              onClick={() => openGallery(3)}
+              className="relative rounded-2xl overflow-hidden shadow-sm bg-neutral-200 h-[140px] sm:h-[200px] lg:h-[230px] col-span-2 group focus:outline-none focus-visible:ring-4 focus-visible:ring-[#FFDE02]"
+              aria-label={`View all ${photos.length} photos`}
+            >
+              <Image alt={`${property.title} gallery image 3`} className="object-cover transition-transform duration-500 group-hover:scale-105" fill sizes="(min-width: 1024px) 33vw, 100vw" src={photos[3]}/>
+              <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-sm font-bold text-white backdrop-blur-[2px] transition-colors group-hover:bg-black/50">
+                View all {photos.length} photos
+              </span>
+            </button>
           </div>
         </div>
       </div>
+
+      {isGalleryOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${property.title} photo gallery`}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+          onClick={() => setIsGalleryOpen(false)}
+        >
+          <div className="flex h-full w-full max-w-6xl flex-col" onClick={(event) => event.stopPropagation()}>
+            <div className="mb-4 flex items-center justify-between gap-4 text-white">
+              <p className="text-sm font-semibold">{selectedPhoto + 1} of {photos.length} photos</p>
+              <button
+                type="button"
+                onClick={() => setIsGalleryOpen(false)}
+                className="rounded-full bg-white/15 p-3 transition-colors hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE02]"
+                aria-label="Close photo gallery"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl bg-neutral-900">
+              <Image
+                alt={`${property.title} photo ${selectedPhoto + 1}`}
+                className="object-contain"
+                fill
+                sizes="100vw"
+                src={photos[selectedPhoto]}
+              />
+              <button
+                type="button"
+                onClick={showPreviousPhoto}
+                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition-colors hover:bg-black/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE02]"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                type="button"
+                onClick={showNextPhoto}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition-colors hover:bg-black/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE02]"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+              {photos.map((photo, index) => (
+                <button
+                  type="button"
+                  key={photo}
+                  onClick={() => setSelectedPhoto(index)}
+                  className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE02] ${selectedPhoto === index ? 'border-[#FFDE02]' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                  aria-label={`Show photo ${index + 1}`}
+                  aria-current={selectedPhoto === index}
+                >
+                  <Image alt="" className="object-cover" fill sizes="96px" src={photo}/>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 2. MAIN CONTENT & SIDEBAR */}
       <div className="max-w-7xl mx-auto px-6 pb-24">
