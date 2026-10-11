@@ -61,7 +61,7 @@ export function BrochureButton({ property }: { property: Property }) {
       </button>
 
       {/* Hidden Brochure Layout (A4 Dimensions: 794px x 1123px) */}
-      <div className="fixed top-0 left-0 w-[794px] h-[1123px] opacity-0 pointer-events-none z-[-1] overflow-hidden">
+      <div className="fixed top-0 left-0 z-[-1] h-px w-px overflow-hidden opacity-0 pointer-events-none">
         <div
           ref={brochureRef}
           className="w-[794px] h-[1123px] bg-white relative flex flex-col font-sans"
