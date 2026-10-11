@@ -165,5 +165,75 @@ export const properties: Property[] = [
       reviews: 124,
       image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
     }
+  },
+  {
+    id: 5,
+    title: 'Chic Marina Apartment',
+    type: 'Apartment',
+    price: 1850000,
+    address: 'Dubai Marina, Dubai',
+    beds: 2,
+    baths: 2,
+    sqft: '1,600 sqft',
+    rating: 4.7,
+    status: 'Ready',
+    category: 'For Buy',
+    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+    ],
+    description: [
+      'A refined two-bedroom apartment in Dubai Marina, designed for effortless waterfront living and moments from the promenade.',
+      'Floor-to-ceiling windows, contemporary finishes, and a private balcony create a light-filled home with skyline and marina views.',
+    ],
+    amenities: ['Marina View', 'Private Balcony', 'Swimming Pool', 'State-of-the-art Gym', '24/7 Security', 'Covered Parking'],
+    faqs: [
+      { q: 'Is the apartment furnished?', a: 'It is offered with a curated furniture package; an unfurnished option can be discussed.' },
+      { q: 'How close is it to the marina walk?', a: 'The marina walk, cafés, and waterfront dining are a short walk from the residence.' },
+    ],
+    agent: {
+      name: 'Marcus Chen',
+      role: 'Investment Advisor',
+      rating: 4.7,
+      reviews: 56,
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80'
+    }
+  },
+  {
+    id: 6,
+    title: 'Desert Oasis Retreat',
+    type: 'Villa',
+    price: 7200000,
+    address: 'Al Barari, Dubai',
+    beds: 6,
+    baths: 7,
+    sqft: '14,500 sqft',
+    rating: 4.9,
+    status: 'Ready',
+    category: 'For Buy',
+    image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80',
+    ],
+    description: [
+      'A secluded six-bedroom villa set within the lush landscape of Al Barari, balancing generous family spaces with resort-style privacy.',
+      'The residence features a landscaped garden, a private pool, and expansive indoor-outdoor entertaining areas for Dubai living at its most relaxed.',
+    ],
+    amenities: ['Private Swimming Pool', 'Landscaped Garden', 'Smart Home System', 'Private Cinema', 'Maid\'s Room', 'Secure Perimeter'],
+    faqs: [
+      { q: 'Is the villa move-in ready?', a: 'Yes. The villa is ready for immediate occupation, subject to the standard completion process.' },
+      { q: 'Does the property have a private pool?', a: 'Yes, the landscaped grounds include a private pool and outdoor entertaining area.' },
+    ],
+    agent: {
+      name: 'Almond D. Dawson',
+      role: 'Senior Principal Broker',
+      rating: 4.9,
+      reviews: 124,
+      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
+    }
   }
 ];
