@@ -49,9 +49,9 @@ export function HeroFilterCard() {
       {/* ROW 1: Tab switcher, Location Input, Search Button */}
       <div className="flex flex-col items-stretch gap-3 mb-4">
         
-        <div className="flex justify-between items-center gap-2">
+        <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between">
           {/* Buy / Rent Switcher */}
-          <div className="flex bg-white/50 dark:bg-neutral-800/50 p-1 rounded-2xl w-full md:w-auto shrink-0 border border-white/60 dark:border-neutral-700">
+          <div className="flex w-full shrink-0 rounded-2xl border border-white/60 bg-white/50 p-1 dark:border-neutral-700 dark:bg-neutral-800/50 sm:w-auto">
             <button
               onClick={() => setActiveTab('buy')}
               className={`flex-1 md:flex-initial px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
@@ -77,9 +77,9 @@ export function HeroFilterCard() {
           {/* AI Search Toggle */}
           <button
             onClick={() => setIsAiSearch(!isAiSearch)}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all border shrink-0 ${
+            className={`flex w-full items-center justify-center gap-1.5 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-all sm:w-auto sm:shrink-0 ${
               isAiSearch 
-                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent shadow-md' 
+                ? 'bg-[#FFDE02] text-black border-[#FFDE02] shadow-md hover:bg-yellow-400'
                 : 'bg-white/50 dark:bg-neutral-800/50 text-neutral-800 dark:text-neutral-200 border-white/60 dark:border-neutral-700 hover:bg-white/80 dark:hover:bg-neutral-700/80'
             }`}
           >
@@ -90,8 +90,8 @@ export function HeroFilterCard() {
 
         {/* Search Input */}
         {isAiSearch ? (
-          <div className="relative w-full bg-white dark:bg-neutral-800 rounded-2xl px-4 py-3 border border-purple-300 dark:border-purple-500/50 flex items-start gap-3 shadow-sm ring-2 ring-purple-500/20">
-            <Sparkles className="w-4 h-4 text-purple-500 shrink-0 mt-0.5"/>
+          <div className="relative flex w-full items-start gap-3 rounded-2xl border border-[#FFDE02] bg-white px-4 py-3 shadow-sm ring-2 ring-[#FFDE02]/25 dark:bg-neutral-800">
+            <Sparkles className="w-4 h-4 text-yellow-500 shrink-0 mt-0.5"/>
             <textarea
               placeholder="Describe your ideal property... (e.g., A 3-bedroom villa in Dubai Marina with a sea view under 5M AED)"
               className="w-full bg-transparent text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 focus:outline-none resize-none h-16"

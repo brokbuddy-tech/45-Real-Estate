@@ -8,6 +8,7 @@ import { Bath, Bed, LayoutGrid, List, Search, SlidersHorizontal, Square, Star } 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { SiteFooter } from '@/components/BottomSections';
 
 const categories = ['For Buy', 'For Rent', 'Off-Plan', 'Commercial'];
 
@@ -24,7 +25,7 @@ export default function ListingsPage() {
     <div className="w-full bg-[#111812] min-h-screen font-sans text-neutral-900">
 
       {/* 1. HERO SECTION */}
-      <section className="relative pt-36 pb-28 text-center px-6 overflow-hidden">
+      <section className="relative overflow-hidden px-4 pt-28 pb-20 text-center sm:px-6 sm:pt-36 sm:pb-28">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -52,16 +53,16 @@ export default function ListingsPage() {
       </section>
 
       {/* 2. MAIN CONTENT CONTAINER */}
-      <section className="bg-[#F6F6F4] py-16 px-6 md:px-12">
+      <section className="bg-[#F6F6F4] px-4 pt-16 pb-48 sm:px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
 
           {/* Category Switcher Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+          <div className="mb-10 flex flex-wrap items-center justify-center gap-2 sm:mb-12 sm:gap-3">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-3 rounded-full text-sm font-semibold transition-all shadow-sm ${activeCategory === cat
+                className={`w-[calc(50%-0.25rem)] rounded-full px-4 py-3 text-center text-sm font-semibold shadow-sm transition-all sm:w-auto sm:px-6 ${activeCategory === cat
                   ? 'bg-[#111812] text-white'
                   : 'bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200/60'
                   }`}
@@ -71,10 +72,10 @@ export default function ListingsPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12">
 
             {/* LEFT SIDEBAR FILTER */}
-            <div className="lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border border-neutral-200/60 sticky top-24 space-y-6">
+            <div className="space-y-6 rounded-3xl border border-neutral-200/60 bg-white p-4 shadow-sm sm:p-6 lg:sticky lg:top-24 lg:col-span-4">
               <div className="flex items-center justify-between pb-4 border-b border-neutral-100">
                 <h3 className="font-bold text-base flex items-center gap-2">
                   <SlidersHorizontal className="w-4 h-4" /> Filter Listings
@@ -190,7 +191,7 @@ export default function ListingsPage() {
             <div className="lg:col-span-8 space-y-6">
 
               {/* Top Bar (Count, Sort, Grid/List Toggles) */}
-              <div className="bg-white rounded-2xl p-4 shadow-sm border border-neutral-200/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-neutral-200/60 bg-white p-3 shadow-sm sm:flex-row sm:p-4">
                 <p className="text-xs font-medium text-neutral-500">
                   Showing <span className="font-bold text-neutral-900">{initialProperties.length}</span> properties found
                 </p>
@@ -246,9 +247,9 @@ export default function ListingsPage() {
                       </div>
 
                       {/* Details */}
-                      <div className="p-6 flex flex-col justify-between flex-1">
+                      <div className="flex flex-1 flex-col justify-between p-4 sm:p-6">
                         <div>
-                          <div className="text-2xl font-black text-[#111812] mb-1">{formatPrice(property.price)}</div>
+                          <div className="mb-1 text-xl font-black text-[#111812] sm:text-2xl">{formatPrice(property.price)}</div>
                           <h4 className="font-bold text-lg text-neutral-900 transition-colors">{property.title}</h4>
                           <p className="text-xs text-neutral-500 mt-1">{property.address}</p>
                         </div>
@@ -271,17 +272,7 @@ export default function ListingsPage() {
         </div>
       </section>
 
-      {/* 3. FOOTER */}
-      <footer className="relative bg-[#111812] text-white pt-24 pb-0 overflow-hidden">
-        <div className="w-full overflow-hidden leading-none select-none text-center pointer-events-none mt-12">
-          <span
-            className="text-[18vw] font-black tracking-tighter text-transparent block -mb-8"
-            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}
-          >
-            45 real estate
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

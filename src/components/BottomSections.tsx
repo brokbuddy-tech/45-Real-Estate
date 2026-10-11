@@ -231,26 +231,33 @@ export default function BottomSections() {
         </div>
       </section>
 
-      {/* 3. Footer with overlapping CTA and Massive Text */}
-      <footer data-brand-surface="dark" className="relative bg-[#111812] text-white pt-48 pb-0 flex flex-col min-h-[80vh] z-20">
+      <SiteFooter />
+    </>
+  );
+}
+
+export function SiteFooter() {
+  return (
+      /* Footer with overlapping CTA and massive text */
+      <footer data-brand-surface="dark" className="relative z-20 flex min-h-[80vh] flex-col bg-[#111812] pt-40 pb-0 text-white sm:pt-48">
         {/* Overlapping CTA */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl px-6 z-30">
-          <div className="bg-[#111812] rounded-3xl border border-white/10 p-12 overflow-hidden relative shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="absolute top-0 left-1/2 z-30 w-full max-w-6xl -translate-x-1/2 -translate-y-1/2 px-4 sm:px-6">
+          <div className="relative flex flex-col items-center justify-between gap-6 overflow-hidden rounded-3xl border border-white/10 bg-[#111812] p-6 shadow-2xl sm:gap-8 sm:p-12 md:flex-row">
             {/* Background Image Overlay */}
             <div className="absolute inset-0 z-0 opacity-20">
               <Image src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1600" alt="" fill sizes="100vw" className="object-cover" />
             </div>
 
             <div className="relative z-10 w-full md:w-1/2">
-              <BlurReveal as="h2" className="text-4xl md:text-6xl font-bold leading-tight">Ready to book a free tour?</BlurReveal>
+              <BlurReveal as="h2" className="text-3xl font-bold leading-tight sm:text-4xl md:text-6xl">Ready to book a free tour?</BlurReveal>
             </div>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6">
+            <div className="relative z-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-6">
               <div className="flex flex-col items-center sm:items-end text-right">
                 <span className="text-gray-400 text-sm mb-1">Call us directly</span>
-                <a href="tel:+1234567890" className="text-2xl font-bold hover:text-[#FFDE02] transition-colors">+1 (234) 567 890</a>
+                <a href="tel:+1234567890" className="text-xl font-bold transition-colors hover:text-[#FFDE02] sm:text-2xl">+1 (234) 567 890</a>
               </div>
-              <button className="px-8 py-4 bg-[#FFDE02] text-black font-bold rounded-full text-lg shadow-lg hover:bg-yellow-400 transition-colors whitespace-nowrap">
+              <button className="whitespace-nowrap rounded-full bg-[#FFDE02] px-6 py-3 text-base font-bold text-black shadow-lg transition-colors hover:bg-yellow-400 sm:px-8 sm:py-4 sm:text-lg">
                 Book appointment
               </button>
             </div>
@@ -258,7 +265,7 @@ export default function BottomSections() {
         </div>
 
         {/* Footer Links Grid */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center mb-12">
+        <div className="relative z-20 mx-auto mb-12 flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-white/10 pb-16">
             {/* About & Trust */}
             <div className="col-span-1 md:col-span-4">
@@ -337,6 +344,5 @@ export default function BottomSections() {
           </BlurReveal>
         </div>
       </footer>
-    </>
   );
 }

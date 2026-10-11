@@ -25,12 +25,12 @@ export default function PropertyGrid() {
   const { formatPrice } = useCurrency();
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto bg-gray-50 rounded-3xl my-10">
-      <div className="flex justify-between items-end mb-12">
-        <BlurReveal as="h2" className="text-4xl font-bold text-gray-900">Featured Properties</BlurReveal>
+    <section className="mx-4 my-6 max-w-7xl rounded-3xl bg-gray-50 px-4 py-12 sm:mx-auto sm:my-10 sm:px-6 sm:py-24">
+      <div className="mb-8 flex flex-col items-stretch gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+        <BlurReveal as="h2" className="text-3xl font-bold text-gray-900 sm:text-4xl">Featured Properties</BlurReveal>
         <Link
           href="/listings"
-          className="px-6 py-2 rounded-full border border-gray-300 font-medium hover:bg-gray-100 transition-colors"
+          className="inline-flex w-full items-center justify-center rounded-full bg-[#FFDE02] px-6 py-3 font-bold text-black transition-colors hover:bg-yellow-400 sm:w-auto"
         >
           View All
         </Link>
@@ -41,7 +41,7 @@ export default function PropertyGrid() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3"
       >
         {properties.map((property) => (
           <Link href={`/listings/${property.id}`} key={property.id} className="group block">
@@ -72,7 +72,7 @@ export default function PropertyGrid() {
                 <p className="mb-6 text-gray-500">{property.address}</p>
 
                 {/* Icons Row */}
-                <div className="flex items-center justify-between border-t border-gray-100 pt-6 text-sm text-gray-600">
+                <div className="grid grid-cols-2 gap-3 border-t border-gray-100 pt-6 text-sm text-gray-600 sm:grid-cols-4">
                   <div className="flex items-center gap-2">
                     <Bed size={16} /> <span>{property.beds}</span>
                   </div>

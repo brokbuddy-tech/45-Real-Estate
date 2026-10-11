@@ -8,6 +8,7 @@ import { Bed, Bath, Square, Star, CheckCircle2, ChevronDown, ChevronLeft, Chevro
 import { useCurrency } from '@/context/CurrencyContext';
 import { properties } from '@/data/properties';
 import { BrochureButton } from '@/components/BrochureButton';
+import { SiteFooter } from '@/components/BottomSections';
 
 export default function PropertyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { formatPrice } = useCurrency();
@@ -65,10 +66,11 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
   };
 
   return (
-    <div className="w-full bg-[#F6F6F4] min-h-screen font-sans text-neutral-900 pt-28">
+    <>
+      <div className="w-full min-h-screen bg-[#F6F6F4] pt-20 font-sans text-neutral-900 sm:pt-28">
       
       {/* 1. PHOTO GALLERY HEADER */}
-      <div className="max-w-7xl mx-auto px-6 mb-12">
+      <div className="mx-auto mb-12 max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:h-[480px]">
           {/* Main Large Image */}
           <button
@@ -178,7 +180,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
       )}
 
       {/* 2. MAIN CONTENT & SIDEBAR */}
-      <div className="max-w-7xl mx-auto px-6 pb-24">
+      <div className="mx-auto max-w-7xl px-4 pb-48 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* LEFT COLUMN: Property Info */}
@@ -299,7 +301,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
           </div>
 
           {/* RIGHT COLUMN: Sticky Sidebar (Agent Contact + Mortgage Calculator) */}
-          <div className="lg:col-span-4 space-y-8 sticky top-28">
+          <div className="space-y-8 lg:sticky lg:top-28 lg:col-span-4">
             
             {/* Trakheesi Permit Badge */}
             <div className="bg-white rounded-3xl p-6 shadow-sm border border-neutral-200/60 flex items-center justify-between">
@@ -400,7 +402,9 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
         </div>
       </div>
 
-    </div>
+      </div>
+      <SiteFooter />
+    </>
   );
 }
 

@@ -10,10 +10,10 @@ export default function ScrollTextReveal() {
     offset: ["start start", "end end"],
   });
 
-  // Calculate the clip-path based on scroll progress to reveal the solid text
+  // Reveal the solid overlay from top to bottom as the bottom inset shrinks.
   const clipPath = useTransform(scrollYProgress, [0, 1], [
-    "inset(0 100% 0 0)",
-    "inset(0 0% 0 0)",
+    "inset(0 0 100% 0)",
+    "inset(0 0 0% 0)",
   ]);
 
   const text = "Spacious and sunlit. Modern living redesigned for your comfort and elegance.";
